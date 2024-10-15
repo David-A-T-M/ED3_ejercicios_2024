@@ -45,7 +45,7 @@ SysTick_Handler() {
         cont++;     // Incrementa el contador de tiempo de los 30 segundos
         if (cont == 300)    // Si pasaron los 30 segundos
             LPC_GPIO1->FIOSET |= 1<<11; // Enciende el buzzer
-    }
+    }   // Me olvidé esa llave en el parcial
     if (flag_lec) { // Si se presionó el botón para confirmar la contraseña
         if ((LPC_GPIO2->FIOPIN & 0xF) == 0b1010) {  // Si la contraseña es correcta
             flag_lec = 0;   // Bajo el flag de confirmación de contraseña
@@ -62,8 +62,9 @@ SysTick_Handler() {
     }
 }
 
-// Habilitación de interrupción por flanco de subida en P0[6] para el sensor de puerta, literalmente la misma función que
-// el ejercicio anterior, pero con otro puerto
+// Habilitación de interrupción por flanco de subida en P0[6] para el sensor de puerta
+// En el parcial, escribí la función, pero no su contenido, por eso está comentado, pero es literalmente
+// la misma función que el ejercicio anterior, pero con otro puerto
 void confGPIOInt() {
     //LPC_GPIOINT->IO0IntEnR |= 1<<6; // Habilito interrupción por flanco de subida en P0[1] para el switch
     //NVIC_ClearPendingIRQ(EINT3_IRQn); // debió ser LPC_SC->EXTINT |= 8;
