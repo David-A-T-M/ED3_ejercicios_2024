@@ -1,0 +1,31 @@
+graph TD
+    M1([Inicio])
+    M2["Configuro pines<br>P0.0<br>MAT1.0"]
+    M3["Configuro interrupción<br>para el botón"]
+    M4["Configuro timer<br>MR0 = 10"]
+    M5{"While(1)"}
+    T1["TC++"]
+    T2{"TC = 10?"}
+    T3["TC = 0<br>Toggle Mat1.0"]
+    G1([Pulsador])
+    G2[[EINT3_Handler<br>Cambio el PCLK_TIMER1<br>Limpiar flag]]
+
+    %% Main
+    M1 --> M2
+    M2 --> M3
+    M3 --> M4
+    M4 --> M5
+    M5 --> M5
+
+    %% Interrupt
+    G1 --> G2
+    G2 --> M5
+
+    %% Timer
+    M4 --> T1
+    T1 --> T2
+    T2 -- No --> T1
+    T2 -- Sí --> T3
+    T3 --> T1
+
+

@@ -2,35 +2,35 @@
 
 ## LPC_GPIOx->FIODIR
 `Dirección de los pines`
-- **31:0[0]**: `0 = Entrada`, `1 = Salida`, 1 bit por pin.
+- **31:0 [0]**: `0 = Entrada`, `1 = Salida`, 1 bit por pin.
 
 ## LPC_GPIOx->FIOMASK
 `Máscara de bits`
-- **31:0[0]**: Habilita la lectura y escritura de cada pin, 1 bit por pin.
+- **31:0 [0]**: Habilita la lectura y escritura de cada pin, 1 bit por pin.
   - `0` 
   - `1`
 
 ## LPC_GPIOx->FIOPIN
 `Estado de los pines`
-- **31:0[0]**: Estado de cada pin, 1 bit por pin.
+- **31:0 [0]**: Estado de cada pin, 1 bit por pin.
   - `0`
   - `1`
 
 ## LPC_GPIOx->FIOSET
 `Pone en alto los pines a los que les asigne un 1 en este registro`
-- **31:0[0]** 1 bit por pin.
+- **31:0 [0]** 1 bit por pin.
 
 ## LPC_GPIOx->FIOCLR
 `Pone en bajo los pines a los que les asigne un 1 en este registro`
-- **31:0[0]** 1 bit por pin.
+- **31:0 [0]** 1 bit por pin.
 
 ## LPC_GPIOINT->IOxIntEnR
 `Habilita las interrupciones por flanco de subida en el puerto x`
-- **31:0[0]**
+- **31:0 [0]**
 
 ## LPC_GPIOINT->IOxIntEnF
 `Habilita las interrupciones por flanco de bajada en el puerto x`
-- **31:0[0]**
+- **31:0 [0]**
 
 ## LPC_GPIOINT->IntStatus
 `Estado de las interrupciones`
@@ -39,15 +39,15 @@
 
 ## LPC_GPIOINT->IOxIntStatR
 `Estado de las interrupciones por flanco de subida en el puerto x`
-- **31:0[0]**: Se pone en 1 cuando hubo una interrupción por flanco de subida en el pin correspondiente.
+- **31:0 [0]**: Se pone en 1 cuando hubo una interrupción por flanco de subida en el pin correspondiente.
 
 ## LPC_GPIOINT->IOxIntStatF
 `Estado de las interrupciones por flanco de bajada en el puerto x`
-- **31:0[0]**: Se pone en 1 cuando hubo una interrupción por flanco de bajada en el pin correspondiente.
+- **31:0 [0]**: Se pone en 1 cuando hubo una interrupción por flanco de bajada en el pin correspondiente.
 
 ## LPC_GPIOINT->IOxIntClr
 `Limpia las interrupciones de los pines correspondientes del puerto x`
-- **31:0[0]**
+- **31:0 [0]**
 
 ---
 
@@ -84,7 +84,7 @@
 ## GPIO_IntCmd(portNum, bitValue, edgeState)
 `Habilita las interrupciones por flanco de subida o bajada (P0.0-P0.30, P2.0-P2.13)`
 - **portNum**: Puerto a configurar. `0` o `2` únicamente.
-- **bitValue**: Elección de los pines a configurar.
+- **bitValue**: `0` a `0xFFFFFFFF` para elegir los pines a configurar. No hace |= con el registro, lo sobreescribe.
 - **edgeState**:
   - `0`: Flanco de subida
   - `1`: Flanco de bajada
