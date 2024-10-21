@@ -45,4 +45,4 @@
 
 ## PINSEL_ConfigPin(PinCfg)
 `Configura un pin`
-- **PinCfg**: Estructura de configuración.
+- **PinCfg**: Puntero a estructura de configuración.

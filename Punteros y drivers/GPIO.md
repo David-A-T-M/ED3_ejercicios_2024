@@ -101,6 +101,9 @@
 ## NVIC_EnableIRQ(EINT3_IRQn)
 `Habilita la interrupción en el NVIC`
 
+## EINT3_IRQHandler()
+`Handler de la interrupción de GPIO`
+
 ## FunctionalState GPIO_GetIntStatus(portNum, pinNum, edgeState)
 `Devuelve el estado de la interrupción (1 o 0) de un pin (P0.0-P0.30, P2.0-P2.13)`
 - **portNum**: Puerto a leer. `0` o `2` únicamente.

@@ -1,3 +1,29 @@
+# TIMERS
+
+## Pines disponibles
+- **Timer 0**:
+  - **CAP0.0**: P1[26]. Func 11.
+  - **CAP0.1**: P1[27]. Func 11.
+  - **MAT0.0**: P1[28]. Func 11. P3[25] Func 10.
+  - **MAT0.1**: P1[29]. Func 11. P3[26] Func 10.
+- **Timer 1**:
+  - **CAP1.0**: P1[18]. Func 11.
+  - **CAP1.1**: P1[19]. Func 11.
+  - **MAT1.0**: P1[22]. Func 11.
+  - **MAT1.1**: P1[25]. Func 11.
+- **Timer 2**:
+  - **CAP2.0**: P0[4]. Func 11.
+  - **CAP2.1**: P0[5]. Func 11.
+  - **MAT2.0**: P0[6]. Func 11. P4[28] Func 10.
+  - **MAT2.1**: P0[7]. Func 11. P4[29] Func 10.
+  - **MAT2.2**: P0[8]. Func 11.
+  - **MAT2.3**: P0[9]. Func 11.
+- **Timer 3**:
+  - **CAP3.0**: P0[23]. Func 11.
+  - **CAP3.1**: P0[24]. Func 11.
+  - **MAT3.0**: P0[10]. Func 11.
+  - **MAT3.1**: P0[11]. Func 11.
+
 # Registros de los Timers
 
 ## LPC_SC->PCONP
@@ -165,7 +191,7 @@ sin embargo, el otro CAP se puede seguir usando para interrumpir o capturar el T
   - `TIM_COUNTER_RISING` Modo contador, captura en flanco de subida
   - `TIM_COUNTER_FALLING` Modo contador, captura en flanco de bajada
   - `TIM_COUNTER_ANY` Modo contador, captura en flanco de subida y bajada
-- **TIM_ConfigStruct**: `TIM_TIMERCFG_Type` para timer o `TIM_COUNTERCFG_Type` para contador.
+- **TIM_ConfigStruct**: Puntero `TIM_TIMERCFG_Type` para timer o `TIM_COUNTERCFG_Type` para contador.
 
 ## TIM_DeInit(LPC_TIMx)
 `Detiene el timer y deshabilita el power`
@@ -210,11 +236,11 @@ sin embargo, el otro CAP se puede seguir usando para interrumpir o capturar el T
   - `TIM_COUNTER_RISING` Modo contador, captura en flanco de subida
   - `TIM_COUNTER_FALLING` Modo contador, captura en flanco de bajada
   - `TIM_COUNTER_ANY` Modo contador, captura en flanco de subida y bajada
-- **TIM_ConfigStruct**: `TIM_TIMERCFG_Type` para timer o `TIM_COUNTERCFG_Type` para contador.
+- **TIM_ConfigStruct**: Puntero `TIM_TIMERCFG_Type` para timer o `TIM_COUNTERCFG_Type` para contador.
 
 ## TIM_ConfigMatch(LPC_TIMx, TIM_MatchConfigStruct)
 `Configura el valor del match, las interrupciones y el comportamiento de la salida`
-- **TIM_MatchConfigStruct**: `Estructura de configuración de tipo TIM_MATCHCFG_Type`
+- **TIM_MatchConfigStruct**: `Puntero a estructura de configuración de tipo TIM_MATCHCFG_Type`
 
 ## TIM_UpdateMatchValue(LPC_TIMx, MatchChannel, MatchValue)
 `Configura el valor de match`
@@ -233,9 +259,16 @@ sin embargo, el otro CAP se puede seguir usando para interrumpir o capturar el T
   - `TIM_EXTMATCH_HIGH`
   - `TIM_EXTMATCH_TOGGLE`
 
+## NVIC_EnableIRQ(TIMERx_IRQn)
+`Habilita la interrupción del timer en el NVIC`
+- **TIMERx_IRQn**: Interrupción del timer. `x = [0-3]`
+
+## TIMERx_IRQHandler()
+`Handler de la interrupción del timer x [0-3]`
+
 ## TIM_ConfigCapture(LPC_TIMx, TIM_CaptureConfigStruct)
 `Configura el flanco de captura`
-- **TIM_CaptureConfigStruct**: `Estructura de configuración de tipo TIM_CAPTURECFG_Type`
+- **TIM_CaptureConfigStruct**: `Puntero a estructura de configuración de tipo TIM_CAPTURECFG_Type`
 
 ## TIM_Cmd(LPC_TIMx, NewState)
 `Habilita o deshabilita el contador (TCR[0]), no deshabilita el power`

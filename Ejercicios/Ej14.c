@@ -33,7 +33,7 @@ void confPIN() {
 
 void confInt() {
   GPIO_IntCmd(0, 1, 1);   // Habilito interrupción de P0.0 por flanco de bajada
-  EXTI_ClearEXTIFlag(EXTI_EINT3);  // Limpio la bandera de interrupción
+  GPIO_ClearInt(0, 1);    // Limpio interrupción de P0.0
   NVIC_EnableIRQ(EINT3_IRQn);  // Habilito la interrupción en el NVIC
 }
 void confTimer() {

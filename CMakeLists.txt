@@ -8,5 +8,6 @@ add_executable(ED3_ejercicios main.c
         "Parciales/2024 - 1er - Ej2.c"
         Ejercicios/Ej14.c
         Ejercicios/Ej15.c
-        Ejercicios/Ej01.c)
+        Ejercicios/Ej01.c
+        "Ejercicios/Ej timer Gallardo.c")
 

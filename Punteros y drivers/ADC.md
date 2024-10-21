@@ -109,6 +109,9 @@
 ## NVIC_EnableIRQ(ADC_IRQn)
 `Habilita la interrupción del ADC en el NVIC`
 
+## ADC_IRQHandler()
+`Handler de la interrupción del ADC`
+
 ## ADC_PowerdownCmd(LPC_ADC, NewState)
 `Habilita o deshabilita el PDN del ADC (Innecesario si se usa ADC_Init)`
 - **NewState**: `ENABLE` o `DISABLE`

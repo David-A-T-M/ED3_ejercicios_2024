@@ -48,6 +48,9 @@
 `Habilita o deshabilita la interrupción del SysTick`
 - **NewState**: ENABLE o DISABLE
 
+## SysTick_Handler()
+`Handler de la interrupción del SysTick`
+
 ## uint32_t SYSTICK_GetCurrentValue()
 `Devuelve el valor actual del contador del SysTick (VAL)`
 

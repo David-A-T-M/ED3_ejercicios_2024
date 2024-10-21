@@ -146,3 +146,91 @@ Se pone en 0 cuando se completa la transferencia simple.
 - **15 ITC [0]**: Máscara de interrupción de transferencia completa.
 - **17 A [0]**: Estado del canal.
 - **18 H [0]**: Ignora los pedidos de transferencia.
+
+# Drivers del DMA
+
+## Estructuras de configuración
+- **GPDMA_Channel_CFG_Type**
+  - **uint32_t ChannelNum**:
+    - `0 a 7`. Número de canal. El canal 0 tiene la mayor prioridad.
+  - **uint32_t TransferSize**:
+    - `Tamaño total de la transferencia.`
+  - **uint32_t TransferWidth**:
+    - `Ancho de la transferencia.`
+  - **uint32_t SrcMemAddr**:
+    - `Dirección de la fuente.`
+  - **uint32_t DstMemAddr**:
+    - `Dirección del destino.`
+  - **uint32_t TransferType**:
+    - `GPDMA_TRANSFERTYPE_M2M`
+    - `GPDMA_TRANSFERTYPE_M2P`
+    - `GPDMA_TRANSFERTYPE_P2M`
+    - `GPDMA_TRANSFERTYPE_P2P`
+  - **uint32_t SrcConn**: Periférico fuente.
+    - `GPDMA_CONN_SSP0_Tx`
+    - `GPDMA_CONN_SSP0_Rx`
+    - `GPDMA_CONN_SSP1_Tx`
+    - `GPDMA_CONN_SSP1_Rx`
+    - `GPDMA_CONN_ADC`
+    - `GPDMA_CONN_I2S_Channel_0`
+    - `GPDMA_CONN_I2S_Channel_1`
+    - `GPDMA_CONN_DAC`
+    - `GPDMA_CONN_UART0_Tx`
+    - `GPDMA_CONN_UART0_Rx`
+    - `GPDMA_CONN_UART1_Tx`
+    - `GPDMA_CONN_UART1_Rx`
+    - `GPDMA_CONN_UART2_Tx`
+    - `GPDMA_CONN_UART2_Rx`
+    - `GPDMA_CONN_UART3_Tx`
+    - `GPDMA_CONN_UART3_Rx`
+    - `GPDMA_CONN_MAT0_0`
+    - `GPDMA_CONN_MAT0_1`
+    - `GPDMA_CONN_MAT1_0`
+    - `GPDMA_CONN_MAT1_1`
+    - `GPDMA_CONN_MAT2_0`
+    - `GPDMA_CONN_MAT2_1`
+    - `GPDMA_CONN_MAT3_0`
+    - `GPDMA_CONN_MAT3_1`
+  - **uint32_t DstConn**: `Periférico destino.`
+    - `Idem`
+  - **uint32_t DMALLI**:
+    - `Si no hay siguiente LLI, poner 0.`
+- **GPDMA_LLI_Type**
+  - **uint32_t SrcAddr**:
+    - `Dirección de la fuente.`
+  - **uint32_t DstAddr**:
+    - `Dirección del destino.`
+  - **uint32_t NextLLI**:
+    - `Dirección del siguiente LLI.`
+  - **uint32_t Control**:
+    - `Control de la transferencia.`
+
+## GPDMA_Init()
+`Habilita el power, limpia los registros de configuración de los canales y limpia las interrupciones`
+
+## Status GPDMA_Setup(GPDMAChannelConfig)
+`Configura un canal, no lo habilita, devuelve 1 si la configuración fue exitosa`
+- **GPDMAChannelConfig**: `Puntero a estructura de configuración de tipo GPDMA_Channel_CFG_Type`
+
+## IntStatus GPDMA_IntGetStatus(type, channel)
+`Devuelve el estado de las interrupciones, 1 si existe una interrupción activa`
+- **type**:
+  - `GPDMA_STAT_INT`
+  - `GPDMA_STAT_INTTC`
+  - `GPDMA_STAT_INTERR`
+  - `GPDMA_STAT_RAWINTTC`
+  - `GPDMA_STAT_RAWINTERR`
+  - `GPDMA_STAT_ENABLED_CH`
+- **channel**: Canal a consultar.
+
+## GPDMA_ClearIntPending(type, channel)
+`Limpia las interrupciones`
+- **type**:
+  - `GPDMA_STATCLR_INTTC`
+  - `GPDMA_STATCLR_INTERR`
+- **channel**: Canal a limpiar.
+
+## GPDMA_ChannelCmd(channelNum, NewState)
+`Habilita o deshabilita un canal`
+- **channelNum**: Canal a habilitar/deshabilitar.
+- **NewState**: `ENABLE` o `DISABLE`

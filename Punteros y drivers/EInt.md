@@ -58,8 +58,11 @@
 - **EXTICfg**: Estructura de configuración.
 
 ## NVIC_EnableIRQ(EINTx_IRQn)
-`Habilita la interrupción extrena x en el NVIC`
+`Habilita la interrupción externa x en el NVIC`
 - x [0-3].
+
+## EINTx_IRQHandler(void)
+`Handlers de la interrupción externa x [0-3]`
 
 ## EXTI_SetMode(EXTILine, mode)
 `Configura el modo de una interrupción externa`
