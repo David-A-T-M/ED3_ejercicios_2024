@@ -9,7 +9,13 @@ introducir el código correcto. Si después de dos intentos el código ingresado
 encendiendo un buzzer conectado al pin P1[11]
 */
 
-#include "C:\Users\David\Documents\MCUXpressoIDE_11.7.1_9221\TP\CMSISv2p00_LPC17xx\inc\LPC17xx.h"
+/**
+ *   Transcripción literal de mi parcial.
+ *   - Error en la forma de limpiar los flags de interrupción
+ *   - Roté un bit en exceso en la línea 32
+ *   - Llave de cierre olvidada. línea 54
+ *   - No tuve tiempo de escribir la implementación de confGPIOInt() aunque es casi igual que en el ejercicio 1. línea 74
+ */
 
 // Configura la interrupción EINT0 y el pin 2[4] para el botón de confirmación de contraseña
 void confEINT0() {
@@ -66,9 +72,9 @@ SysTick_Handler() {
 // En el parcial, escribí la función, pero no su contenido, por eso está comentado, pero es literalmente
 // la misma función que el ejercicio anterior, pero con otro puerto
 void confGPIOInt() {
-    //LPC_GPIOINT->IO0IntEnR |= 1<<6; // Habilito interrupción por flanco de subida en P0[1] para el switch
-    //NVIC_ClearPendingIRQ(EINT3_IRQn); // debió ser LPC_SC->EXTINT |= 8;
-    //NVIC_EnableIRQ(EINT3_IRQn); // Habilita interrupción EINT3
+    /*LPC_GPIOINT->IO0IntEnR |= 1<<6;*/ // Habilito interrupción por flanco de subida en P0[1] para el switch
+    /*NVIC_ClearPendingIRQ(EINT3_IRQn);*/ // debió ser LPC_SC->EXTINT |= 8;
+    /*NVIC_EnableIRQ(EINT3_IRQn);*/ // Habilita interrupción EINT3
 }
 
 // Variables globales

@@ -1,52 +1,61 @@
+# GPIO
+
+## Pines disponibles
+- **Puerto 0**: [0-11], [15-30]; pueden interrumpir
+- **Puerto 1**: [0-1], [4], [8-10], [14-31]
+- **Puerto 2**: [0-13]; pueden interrumpir
+- **Puerto 3**: [25-26]
+- **Puerto 4**: [28-29]
+
 # Registros de los GPIO
 
 ## LPC_GPIOx->FIODIR
-`Dirección de los pines`
+`Dirección de los pines [R/W]`
 - **31:0 [0]**: `0 = Entrada`, `1 = Salida`, 1 bit por pin.
 
 ## LPC_GPIOx->FIOMASK
-`Máscara de bits`
+`Máscara de bits [R/W]`
 - **31:0 [0]**: Habilita la lectura y escritura de cada pin, 1 bit por pin.
   - `0` 
   - `1`
 
 ## LPC_GPIOx->FIOPIN
-`Estado de los pines`
+`Estado de los pines [R/W]`
 - **31:0 [0]**: Estado de cada pin, 1 bit por pin.
   - `0`
   - `1`
 
 ## LPC_GPIOx->FIOSET
-`Pone en alto los pines a los que les asigne un 1 en este registro`
+`Pone en alto los pines a los que les asigne un 1 en este registro [R/W]`
 - **31:0 [0]** 1 bit por pin.
 
 ## LPC_GPIOx->FIOCLR
-`Pone en bajo los pines a los que les asigne un 1 en este registro`
+`Pone en bajo los pines a los que les asigne un 1 en este registro [WO]`
 - **31:0 [0]** 1 bit por pin.
 
 ## LPC_GPIOINT->IOxIntEnR
-`Habilita las interrupciones por flanco de subida en el puerto x`
+`Habilita las interrupciones por flanco de subida en el puerto x [R/W]`
 - **31:0 [0]**
 
 ## LPC_GPIOINT->IOxIntEnF
-`Habilita las interrupciones por flanco de bajada en el puerto x`
+`Habilita las interrupciones por flanco de bajada en el puerto x [R/W]`
 - **31:0 [0]**
 
 ## LPC_GPIOINT->IntStatus
-`Estado de las interrupciones`
+`Estado de las interrupciones [RO]`
 - **0 P0Int [0]**: Se pone en 1 cuando hay por lo menos una interrupción pendiente en el puerto 0.
 - **2 P2Int [0]**: Se pone en 1 cuando hay por lo menos una interrupción pendiente en el puerto 2.
 
 ## LPC_GPIOINT->IOxIntStatR
-`Estado de las interrupciones por flanco de subida en el puerto x`
+`Estado de las interrupciones por flanco de subida en el puerto x [RO]`
 - **31:0 [0]**: Se pone en 1 cuando hubo una interrupción por flanco de subida en el pin correspondiente.
 
 ## LPC_GPIOINT->IOxIntStatF
-`Estado de las interrupciones por flanco de bajada en el puerto x`
+`Estado de las interrupciones por flanco de bajada en el puerto x [RO]`
 - **31:0 [0]**: Se pone en 1 cuando hubo una interrupción por flanco de bajada en el pin correspondiente.
 
 ## LPC_GPIOINT->IOxIntClr
-`Limpia las interrupciones de los pines correspondientes del puerto x`
+`Limpia las interrupciones de los pines correspondientes del puerto x [WO]`
 - **31:0 [0]**
 
 ---
@@ -88,6 +97,9 @@
 - **edgeState**:
   - `0`: Flanco de subida
   - `1`: Flanco de bajada
+
+## NVIC_EnableIRQ(EINT3_IRQn)
+`Habilita la interrupción en el NVIC`
 
 ## FunctionalState GPIO_GetIntStatus(portNum, pinNum, edgeState)
 `Devuelve el estado de la interrupción (1 o 0) de un pin (P0.0-P0.30, P2.0-P2.13)`

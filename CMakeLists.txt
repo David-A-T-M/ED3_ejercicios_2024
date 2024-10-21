@@ -4,7 +4,9 @@ project(ED3_ejercicios C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(ED3_ejercicios main.c
-        "Primer parcial 1ra.c"
-        "Primer parcial 2da.c"
-        Ejercicios/Ej14.c)
+        "Parciales/2024 - 1er - Ej1.c"
+        "Parciales/2024 - 1er - Ej2.c"
+        Ejercicios/Ej14.c
+        Ejercicios/Ej15.c
+        Ejercicios/Ej01.c)
 

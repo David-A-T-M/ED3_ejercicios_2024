@@ -10,7 +10,11 @@ Durante dicha ventana, se debe contar cuantas veces se presiona el switch y en f
 tiempo de la barrera.
 */
 
-#include "C:\Users\David\Documents\MCUXpressoIDE_11.7.1_9221\TP\CMSISv2p00_LPC17xx\inc\LPC17xx.h"
+/**
+ *   Transcripción literal de mi parcial.
+ *   - Error en la forma de limpiar los flags de interrupción
+ *   - Variable global tiempo no declarada. línea 71
+ */
 
 // Configura la interrupción EINT0 y el pin 2[4] donde está el sensor que interrumpe cuando un auto se posiciona frente a la barrera
 void confEINT0() {
@@ -64,7 +68,7 @@ int contx = 0; // Contador de tiempo
 int cont3 = 0; // Contador de tiempo de la ventana de configuración
 int contador = 0; // Contador de veces que se presiona el switch
 int flag = 1; // Flag para saber si se presionó el switch, 1 si no se presionó, 0 si se presionó y estoy en la ventana de configuración
-int tiempo = 25;  // Tiempo de la barrera inicial
+/*int tiempo = 25;*/  // Tiempo de la barrera inicial, olvidé declararla
 
 // Interrupción de SysTick cada 0,2 segundos
 SysTick_Handler() {

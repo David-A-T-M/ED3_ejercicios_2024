@@ -1,14 +1,22 @@
+# INTERRUPCIONES EXTERNAS
+
+## Pines disponibles
+- **EINT0**: P2[10]. Func 01.
+- **EINT1**: P2[11]. Func 01.
+- **EINT2**: P2[12]. Func 01.
+- **EINT3**: P2[13]. Func 01.
+
 # Registros de las interrupciones externas
 
 ## LPC_SC->EXTINT
-`Registros de flag de interrupciones externas`
+`Registros de flag de interrupciones externas [R/W]`
 - **0 EINT0 [0]**: Se limpia escribiendo 1. En modo de nivel, solo se puede limpiar si el pin no está en el nivel configurado para interrumpir.
 - **1 EINT1 [0]**: Idem.
 - **2 EINT2 [0]**: Idem.
 - **3 EINT3 [0]**: Idem.
 
 ## LPC_SC->EXTMODE
-`Registros de configuración de modo de las interrupciones externas`
+`Registros de configuración de modo de las interrupciones externas [R/W]`
 - **0 EXTMODE0 [0]**: Se debe deshabilitar la interrupción antes de cambiar el modo, y limpiar el EXTINT correspondiente antes de habilitarla.
     - `0 = Nivel.`
     - `1 = Flanco.`
@@ -17,7 +25,7 @@
 - **3 EXTMODE3 [0]**:
 
 ## LPC_SC->EXTPOLAR
-`Registros de configuración de los flancos de las interrupciones externas`
+`Registros de configuración de los flancos de las interrupciones externas [R/W]`
 - **0 EXTPOLAR0 [0]**: Se debe deshabilitar la interrupción antes de cambiar el modo, y limpiar el EXTINT correspondiente antes de habilitarla.
     - `0 = Nivel bajo o Flanco de bajada.`
     - `1 = Nivel alto o Flanco de subida.`
@@ -48,6 +56,10 @@
 ## EXTI_Config(EXTICfg)
 `Configura una interrupción externa`
 - **EXTICfg**: Estructura de configuración.
+
+## NVIC_EnableIRQ(EINTx_IRQn)
+`Habilita la interrupción extrena x en el NVIC`
+- x [0-3].
 
 ## EXTI_SetMode(EXTILine, mode)
 `Configura el modo de una interrupción externa`

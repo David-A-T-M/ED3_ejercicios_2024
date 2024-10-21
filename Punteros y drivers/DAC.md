@@ -1,7 +1,12 @@
+# DAC
+
+## Pines disponibles
+- **AOUT**: P0[26]. Func 10.
+
 # Registros del DAC
 
 ## LPC_SC->PCLKSEL0
-`Clock para el DAC`
+`Clock para el timer asociado al DAC-DMA [R/W]`
 - **23:22 PCLK_DAC [0]**:
     - `00 = CCLK/4`
     - `01 = CCLK`
@@ -9,14 +14,14 @@
     - `11 = CCLK/8`
 
 ## LPC_DAC->DACR
-`Configuración del DAC`
+`Configuración del DAC [R/W]`
 - **15:6 VALUE [0]**: Valor de salida. (VALUE x (Vrefp - Vrefn) / 1024 + Vrefn)
 - **16 BIAS [0]**:
   - `0` Tiempo de establecimiento de 1us y corriente de salida de 700uA. Permite actualización de 1MHz.
   - `1` Tiempo de establecimiento de 2.5us y corriente de salida de 350uA. Permite actualización de 400kHz.
 
 ## LPC_DAC->DACCTRL
-`Control del DAC`
+`Control del DAC [R/W]`
 - **0 INT_DMA_REQ [0]**: Habilita la solicitud de DMA.
   - `0` El bit se pone a 0 cuando se escribe en `DACR`.
   - `1` El bit se pone a 1 cuando se agota el timer de DMA.
@@ -31,10 +36,10 @@
   - `1` Se habilita el DMA burst request input 7. 
 
 ## LPC_DAC->DACCNTVAL
-`Valor del contador de time-out`
-- **15:0 VALUE [0]**: Valor del contador de time-out.
+`Valor del contador de time-out [R/W]`
+- **15:0 VALUE [0]**
 
---
+---
 
 # Drivers del DAC
 ## Estructuras de configuración

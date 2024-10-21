@@ -1,7 +1,9 @@
+# PINSEL
+
 # Registros de configuración de los pines
 
 ## LPC_PINCON->PINSELx
-`Selección de función de los pines. x de 0 a 9, 2 registros por puerto`
+`Selección de función de los pines. x de 0 a 9, 2 registros por puerto [R/W]`
 - **31:0 [0]**: 2 bits por pin. 
   - `00 = Generalmente GPIO`
   - `01 = Función 1`
@@ -9,7 +11,7 @@
   - `11 = Función 3`
 
 ## LPC_PINCON->PINMODEx
-`Configura las resistencias de entrada en los pines. x de 0 a 9, 2 registros por puerto`
+`Configura las resistencias de entrada en los pines. x de 0 a 9, 2 registros por puerto [R/W]`
 - **31:0 [0]**: 2 bits por pin.
   - `00 = Pull-up`
   - `01 = Repeater` Se habilita PU o PD según el nivel del pin. Para evitar estado flotante y no consumir energía.
@@ -17,7 +19,7 @@
   - `11 = Pull-down`
 
 ## LPC_PINCON->PINMODE_ODx
-`Configura los pines como de drenador abierto. x de 0 a 4`
+`Configura los pines como de drenador abierto. x de 0 a 4 [R/W]`
 - **31:0 [0]**: 1 bit por pin.
   - `0 = Normal`
   - `1 = Open-drain`

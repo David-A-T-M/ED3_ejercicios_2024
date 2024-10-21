@@ -1,11 +1,23 @@
+# ADC
+
+## Pines disponibles
+- **AD0**: P0[23]. Func 01.
+- **AD1**: P0[24]. Func 01.
+- **AD2**: P0[25]. Func 01.
+- **AD3**: P0[26]. Func 01.
+- **AD4**: P1[30]. Func 11.
+- **AD5**: P1[31]. Func 11.
+- **AD6**: P0[3]. Func 10.
+- **AD7**: P0[2]. Func 10.
+
 # Registros del ADC
 
 ## LPC_SC->PCONP
-`Power para el ADC`
+`Power para el ADC [R/W]`
 - **12 PCADC [0]**: Limpiar PDN antes de deshabilitar, habilitar PCADC antes del PDN.
 
 ## LPC_SC->PCLKSEL0
-`Clock para el ADC`
+`Clock para el ADC [R/W]`
 - **25:24 PCLK_ADC [0]**:
     - `00 = CCLK/4`
     - `01 = CCLK`
@@ -13,7 +25,7 @@
     - `11 = CCLK/8`
 
 ## LPC_ADC->ADCR
-`Configuración del ADC`
+`Configuración del ADC [R/W]`
 - **7:0 SEL [0x1]**: Selección de canal, en modo SW se debe habilitar 1 a la vez.
 - **15:8 CLKDIV [0]**: `[PCLK_ADC / (CLKDIV + 1)] <= 13 MHz`
 - **16 BURST [0]**: Si se habilita, `START=000` y `ADINTEN:8=0`.
@@ -29,25 +41,25 @@
 - **27 EDGE [0]**: `0 = Subida`, `1 = Bajada`; decide flanco de `010-111` de `START`.
 
 ## LPC_ADC->ADGDR
-`Estado Global`
+`Estado Global [R/W]
 - **15:4 RESULT [X]**: Última conversión.
 - **26:24 CHN [X]**: Canal que se convirtió.
 - **30 OVERRUN [0]**: Resultado sobrescrito, siempre `1` en burst, se limpia leyendo.
 - **31 DONE [0]**: Conversión lista, se limpia leyendo `ADGDR` o escribiendo `ADCR`. Si se escribe `ADCR` durante una conversión, se pone en `1` y se reinicia la conversión.
 
 ## LPC_ADC->ADINTEN
-`Interrupciones`
+`Interrupciones [R/W]`
 - **7:0 ADINTENx [0]**: Habilita interrupción por canal `x`, `1` = habilita.
 - **8 ADGINTEN [1]**: `0` = Interrumpen los canales habilitados, `1` = interrumpe `DONE` de `ADGDR`.
 
-## LPC_ADC->ADDR0
-`Estado de cada canal`
+## LPC_ADC->ADDRx
+`Estado específico del canal x [0-7] [RO]`
 - **15:4 RESULT [X]**: Última conversión.
 - **30 OVERRUN [0]**: Resultado sobrescrito, siempre `1` en burst, se limpia leyendo.
 - **31 DONE [0]**: Conversión lista, se limpia leyendo.
 
 ## LPC_ADC->ADSTAT
-`Estado Global`
+`Estado Global [RO]`
 - **7:0 DONE [0]**: Repite el `DONE` de `ADDRx`.
 - **15:8 OVERRUN [0]**: Repite el `OVERRUN` de `ADDRx`.
 - **16 ADINT [0]**: Se pone en `1` cuando hay algún `DONE` en `1`, si no hay ningún `DONE` se limpia, por lo que si se interrumpe por software, se limpia leyendo `ADGDR`.
@@ -93,6 +105,9 @@
 - **IntType**:
   - `ADC_ADINTENx`: Habilita interrupción por canal `x`
 - **NewState**: `ENABLE` o `DISABLE`
+
+## NVIC_EnableIRQ(ADC_IRQn)
+`Habilita la interrupción del ADC en el NVIC`
 
 ## ADC_PowerdownCmd(LPC_ADC, NewState)
 `Habilita o deshabilita el PDN del ADC (Innecesario si se usa ADC_Init)`
