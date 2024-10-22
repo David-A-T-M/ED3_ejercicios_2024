@@ -1,0 +1,26 @@
+graph TD
+    %% Main
+    M1[Inicio]
+    M2["Configurar pines<br>CAP0.0<br>CAP0.1"]
+    M3["Configurar timer0<br>"]
+    M4{"While(1)"}
+    %% Interrupción de capture
+    IntCap(["Botón pulsado"])
+    IntCap1[["TIMER0_IRQHandler"]]
+    IntCap2{"1er botón?"}
+    IntCap3["Guardo 1er tiempo"]
+    IntCap4["Guardo 2do tiempo<br>Calculo diferencia"]
+
+    %% Main
+    M1 --> M2
+    M2 --> M3
+    M3 --> M4
+    M4 --> M4
+
+    %% Interrupción de capture
+    IntCap --> IntCap1
+    IntCap1 --> IntCap2
+    IntCap2 -->|Sí| IntCap3
+    IntCap2 -->|No| IntCap4
+    IntCap3 --> M4
+    IntCap4 --> M4
