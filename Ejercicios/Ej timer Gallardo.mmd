@@ -1,0 +1,43 @@
+graph TD
+    M1([Inicio])
+    M2["Configuro pines<br>P0.0 botón<br>P0.1-5 led<br>MAT0.0 Salida señal<br>CAP1.0 Entrada señal"]
+    M3["Configuro interrupción<br>para el botón"]
+    M4["Configuro timer0<br>con Ematch toggle"]
+    M5["Configuro timer1<br>con Capture"]
+    M6{"While(1)"}
+    T1["TC++"]
+    T2{"TC = MR0?"}
+    T3["TC = 0<br>Toggle Mat0.0"]
+    G1([Pulsador])
+    G2[[EINT3_Handler]]
+    G3["Cambio el valor<br>del match"]
+    F1([Capture])
+    F2[["Timer1_Handler"]]
+    F3["Calculo diferencia<br>con el tiempo anterior"]
+    F4["Enciendo leds en<br>función del tiempo"]
+
+    %% Main
+    M1 --> M2
+    M2 --> M3
+    M3 --> M4
+    M4 --> M5
+    M5 --> M6
+    M6 --> M6
+
+    %% Interrupt
+    G1 --> G2
+    G2 --> G3
+    G3 --> M6
+
+    %% Capture
+    F1 --> F2
+    F2 --> F3
+    F3 --> F4
+    F4 --> M6
+
+subgraph Timer0
+    T1 --> T2
+    T2 -- No --> T1
+    T2 -- Sí --> T3
+    T3 --> T1
+end
