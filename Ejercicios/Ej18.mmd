@@ -1,0 +1,48 @@
+graph TD
+    %% Main
+    M1([Inicio])
+    M2["Configurar pines<br>P0.0-3<br>P1.13"]
+    M3["Configurar timer0<br>TC=2,5ms<br>MR0=1<br>interrumpe<br>Priority = 1"]
+    M4["Configurar interrupciones<br>Eint3 FE<br>Priority = 2"]
+    M5{"While(1)"}
+
+    T1["TC++"]
+    T2{"TC = MR0?"}
+    T3["TC = 0<br>Interrumpir"]
+
+    E1(["Pulsador"])
+    E2["Alternar flag"]
+
+    TI1([TC = MR0])
+    TI2[[TIMER0_IRQHandler]]
+    TI3{"Flag = 1?"}
+    TI4["Secuencia A"]
+    TI5["Secuencia B"]
+    TI6["i++"]
+
+    %% Main
+    M1 --> M2
+    M2 --> M3
+    M3 --> M4
+    M4 --> M5
+    M5 --> M5
+
+    %% Interrupción de timer
+    TI1 --> TI2
+    TI2 --> TI3
+    TI3 -->|No| TI5
+    TI3 -->|Sí| TI4
+    TI4 --> TI6
+    TI5 --> TI6
+    TI6 --> M5
+
+    %% Interrupción de pulsador
+    E1 --> E2
+    E2 --> M5
+
+
+    subgraph timer
+        T1 --> T2
+        T2 -->|No| T1
+        T2 -->|Sí| T3
+    end

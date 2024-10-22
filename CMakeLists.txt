@@ -9,5 +9,6 @@ add_executable(ED3_ejercicios main.c
         Ejercicios/Ej14.c
         Ejercicios/Ej19.c
         Ejercicios/Ej01.c
-        "Ejercicios/Ej timer Gallardo.c")
+        "Ejercicios/Ej timer Gallardo.c"
+        Ejercicios/Ej18.c)
 
